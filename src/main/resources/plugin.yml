@@ -1,0 +1,4 @@
+name: GUI
+version: '${project.version}'
+main: com.marlongrazek.gui.GUI
+api-version: 1.19
