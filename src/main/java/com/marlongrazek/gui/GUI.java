@@ -116,6 +116,7 @@ public class GUI {
         private boolean preventClose = false;
         private Consumer<Player> openAction;
         private Consumer<Player> closeAction;
+        private Consumer<Page> updateAction;
 
         private Inventory inventory;
 
@@ -136,6 +137,7 @@ public class GUI {
         public void update() {
             inventory.clear();
             items.keySet().forEach(slot -> inventory.setItem(slot, items.get(slot).toItemStack()));
+            if(updateAction != null) updateAction.accept(this);
         }
 
         public Inventory getInventory() {
@@ -209,6 +211,13 @@ public class GUI {
 
         public Consumer<Player> getCloseAction() {
             return this.closeAction;
+        }
+
+        public Consumer<Page> getUpdateAction() {
+            return updateAction;
+        }
+        public void onUpdate(Consumer<Page> updateAction) {
+            this.updateAction = updateAction;
         }
 
         public void setSection(Section section, int start) {
