@@ -53,7 +53,7 @@ public class GUI {
 
     public void openPageFromHistory(int index) {
 
-        GUI.Page page = history.get(index);
+        GUI.Page page = history.get(history.size() - 1 - index);
 
         // PAGE IS NULL
         if (page == null) {
