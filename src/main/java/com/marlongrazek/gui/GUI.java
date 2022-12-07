@@ -33,10 +33,15 @@ public class GUI {
         this.player = player;
     }
 
-    public void open(Page page, Player player) {
+    public void open(Page page) {
 
         // HISTORY
-        if (!history.isEmpty()) close(player);
+        if (!history.isEmpty()) {
+            Page p = history.get(history.size() - 1);
+            if (p.getCloseAction() != null) p.getCloseAction().accept(player);
+            HandlerList.unregisterAll(events);
+            player.closeInventory();
+        }
         else history.add(null);
         history.add(page);
 
@@ -53,7 +58,6 @@ public class GUI {
         // PAGE IS NULL
         if (page == null) {
             player.closeInventory();
-            history.clear();
             return;
         }
 
@@ -64,7 +68,7 @@ public class GUI {
         player.openInventory(page.inventory);
     }
 
-    public void close(Player player) {
+    public void close() {
 
         Page page = history.get(history.size() - 1);
 
@@ -72,6 +76,8 @@ public class GUI {
         if (page.getCloseAction() != null) page.getCloseAction().accept(player);
         HandlerList.unregisterAll(events);
         player.closeInventory();
+
+        history.clear();
     }
 
     public class Events implements Listener {
@@ -88,8 +94,8 @@ public class GUI {
                 return;
             }
 
-            close(player);
-            history.clear();
+            if (page.getCloseAction() != null) page.getCloseAction().accept(player);
+            HandlerList.unregisterAll(events);
         }
 
         @EventHandler
