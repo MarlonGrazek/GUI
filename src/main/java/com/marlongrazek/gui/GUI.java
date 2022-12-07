@@ -36,10 +36,7 @@ public class GUI {
     public void open(Page page) {
 
         // HISTORY
-        if (!history.isEmpty()) {
-            HandlerList.unregisterAll(events);
-            player.closeInventory();
-        }
+        if (!history.isEmpty()) HandlerList.unregisterAll(events);
         else history.add(null);
         if(history.get(history.size() - 1) == null || !history.get(history.size() - 1).equals(page)) history.add(page);
 
