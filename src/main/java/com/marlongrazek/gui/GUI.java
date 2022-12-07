@@ -87,7 +87,7 @@ public class GUI {
 
             // PREVENT CLOSE
             if (page.preventClose) {
-                player.openInventory(page.getInventory());
+                Bukkit.getScheduler().runTaskLater(plugin, () -> player.openInventory(page.getInventory()), 1);
                 return;
             }
 
