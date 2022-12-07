@@ -37,8 +37,6 @@ public class GUI {
 
         // HISTORY
         if (!history.isEmpty()) {
-            Page p = history.get(history.size() - 1);
-            if (p.getCloseAction() != null) p.getCloseAction().accept(player);
             HandlerList.unregisterAll(events);
             player.closeInventory();
         }
