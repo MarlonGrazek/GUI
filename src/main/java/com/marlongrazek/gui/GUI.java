@@ -42,7 +42,7 @@ public class GUI {
 
         // OPEN PAGE
         if (page.getOpenAction() != null) page.getOpenAction().accept(player);
-        Bukkit.getPluginManager().registerEvents(events, plugin);
+        Bukkit.getScheduler().runTaskLater(plugin, () -> Bukkit.getPluginManager().registerEvents(events, plugin), 1);
         player.openInventory(page.inventory);
     }
 
