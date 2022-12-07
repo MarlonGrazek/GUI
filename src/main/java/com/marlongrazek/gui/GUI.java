@@ -137,7 +137,7 @@ public class GUI {
         public void update() {
             inventory.clear();
             items.keySet().forEach(slot -> inventory.setItem(slot, items.get(slot).toItemStack()));
-            if(updateAction != null) updateAction.accept(this);
+            if(updateAction != null) updateAction.accept(this); 
         }
 
         public Inventory getInventory() {
