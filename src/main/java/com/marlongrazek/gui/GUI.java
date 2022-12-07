@@ -41,7 +41,7 @@ public class GUI {
         history.add(page);
 
         // OPEN PAGE
-        if (page.onOpen() != null) page.onOpen().accept(player);
+        if (page.getOpenAction() != null) page.getOpenAction().accept(player);
         Bukkit.getPluginManager().registerEvents(events, plugin);
         player.openInventory(page.inventory);
     }
@@ -59,7 +59,7 @@ public class GUI {
 
         for (int i = 0; i < index; i++) history.remove(history.size() - 1);
 
-        if (page.onOpen() != null) page.onOpen().accept(player);
+        if (page.getOpenAction() != null) page.getOpenAction().accept(player);
         Bukkit.getPluginManager().registerEvents(events, plugin);
         player.openInventory(page.inventory);
     }
@@ -69,12 +69,9 @@ public class GUI {
         Page page = history.get(history.size() - 1);
 
         // CLOSE PAGE
-        if (page.onClose() != null) page.onClose().accept(player);
+        if (page.getCloseAction() != null) page.getCloseAction().accept(player);
         HandlerList.unregisterAll(events);
         player.closeInventory();
-
-        // HISTORY
-        history.clear();
     }
 
     public class Events implements Listener {
@@ -92,6 +89,7 @@ public class GUI {
             }
 
             close(player);
+            history.clear();
         }
 
         @EventHandler
@@ -205,11 +203,11 @@ public class GUI {
             this.closeAction = closeAction;
         }
 
-        public Consumer<Player> onOpen() {
+        public Consumer<Player> getOpenAction() {
             return this.openAction;
         }
 
-        public Consumer<Player> onClose() {
+        public Consumer<Player> getCloseAction() {
             return this.closeAction;
         }
     }
