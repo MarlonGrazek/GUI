@@ -57,7 +57,7 @@ public class GUI {
 
         // PAGE IS NULL
         if (page == null) {
-            player.closeInventory();
+            close();
             return;
         }
 
