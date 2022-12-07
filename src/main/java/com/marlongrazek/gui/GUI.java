@@ -61,11 +61,8 @@ public class GUI {
             return;
         }
 
-        for (int i = 0; i < index; i++) history.remove(history.size() - 1);
-
-        if (page.getOpenAction() != null) page.getOpenAction().accept(player);
-        Bukkit.getPluginManager().registerEvents(events, plugin);
-        player.openInventory(page.inventory);
+        for (int i = 0; i < index + 1; i++) history.remove(history.size() - 1);
+        open(page);
     }
 
     public void close() {
