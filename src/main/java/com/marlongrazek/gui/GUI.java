@@ -43,7 +43,7 @@ public class GUI {
             player.closeInventory();
         }
         else history.add(null);
-        if(!history.get(history.size() - 1).equals(page)) history.add(page);
+        if(history.get(history.size() - 1) != null && !history.get(history.size() - 1).equals(page)) history.add(page);
 
         // OPEN PAGE
         if (page.getOpenAction() != null) page.getOpenAction().accept(player);
